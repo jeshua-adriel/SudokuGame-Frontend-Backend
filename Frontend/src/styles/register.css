@@ -1,0 +1,575 @@
+
+/* =========================================
+   REGISTER PAGE
+   Uses the existing SudokiGame theme
+   ========================================= */
+
+.register-page {
+  position: relative;
+  min-height: calc(100vh - 80px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: var(--space-7) var(--space-5);
+
+  overflow: hidden;
+}
+
+
+/* =========================================
+   CARD
+   ========================================= */
+
+.register-card {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 460px;
+
+  padding: var(--space-7);
+
+  background: var(--surface);
+
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+
+  box-shadow: var(--shadow-soft);
+
+  animation: registerCardIn 0.55s
+    cubic-bezier(0.2, 0.8, 0.3, 1)
+    both;
+}
+
+@keyframes registerCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* =========================================
+   HEADER
+   ========================================= */
+
+.register-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+
+  margin-bottom: var(--space-6);
+
+  animation: fadeInUp 0.5s ease 0.08s both;
+}
+
+.register-mark {
+  flex-shrink: 0;
+
+  width: 44px;                      
+  height: 44px;                     
+  border-radius: 8px;               
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 3px;                         
+  padding: 5px;                     
+  background: var(--moss);
+
+  box-shadow: var(--shadow-soft);
+
+  animation: registerMarkIn 0.55s
+    cubic-bezier(0.34, 1.56, 0.64, 1)
+    0.12s both;
+}
+
+.register-mark span {
+  background-color: var(--amber-soft);
+  display: block;                   
+}
+
+.register-mark span:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.register-mark span:nth-child(2) {
+  animation-delay: 0.23s;
+}
+
+.register-mark span:nth-child(3) {
+  animation-delay: 0.26s;
+}
+
+.register-mark span:nth-child(4) {
+  animation-delay: 0.29s;
+}
+
+.register-mark span:nth-child(5) {
+  animation-delay: 0.32s;
+}
+
+.register-mark span:nth-child(6) {
+  animation-delay: 0.35s;
+}
+
+.register-mark span:nth-child(7) {
+  animation-delay: 0.38s;
+}
+
+.register-mark span:nth-child(8) {
+  animation-delay: 0.41s;
+}
+
+.register-mark span:nth-child(9) {
+  animation-delay: 0.44s;
+}
+
+.register-mark span.active {
+  background: var(--amber);
+}
+
+@keyframes registerMarkIn {
+  from {
+    opacity: 0;
+    transform: rotate(-8deg) scale(0.75);
+  }
+
+  to {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+  }
+}
+
+@keyframes markCellIn {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.register-heading {
+  min-width: 0;
+}
+
+.register-eyebrow {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: var(--moss-deep);
+
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.register-heading h1 {
+  font-size: 1.75rem;
+  line-height: 1.1;
+}
+
+.register-heading p {
+  margin-top: 5px;
+
+  font-size: 0.88rem;
+}
+
+
+/* =========================================
+   ERROR
+   ========================================= */
+
+.register-error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+
+  margin-bottom: var(--space-5);
+  padding: var(--space-3) var(--space-4);
+
+  color: var(--clay);
+
+  background: var(--clay-soft);
+
+  border: 1px solid rgba(189, 91, 65, 0.2);
+  border-radius: var(--radius-sm);
+
+  font-size: 0.85rem;
+
+  animation: registerError 0.35s ease both;
+}
+
+.error-icon {
+  width: 21px;
+  height: 21px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: var(--clay);
+  color: #fff;
+
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+@keyframes registerError {
+  0% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  60% {
+    transform: translateX(4px);
+  }
+
+  80% {
+    transform: translateX(-3px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+/* =========================================
+   FORM
+   ========================================= */
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.register-field {
+  animation: registerFieldIn 0.45s ease both;
+}
+
+.field-1 {
+  animation-delay: 0.18s;
+}
+
+.field-2 {
+  animation-delay: 0.24s;
+}
+
+.field-3 {
+  animation-delay: 0.30s;
+}
+
+.field-4 {
+  animation-delay: 0.36s;
+}
+
+.field-5 {
+  animation-delay: 0.42s;
+}
+
+@keyframes registerFieldIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.register-field label {
+  display: block;
+
+  margin-bottom: var(--space-2);
+
+  color: var(--ink-soft);
+
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.register-field input,
+.register-field select {
+  width: 100%;
+
+  padding: 11px 13px;
+
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+
+  background: var(--surface-soft);
+
+  color: var(--ink);
+
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+
+  outline: none;
+
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.18s ease;
+}
+
+.register-field input::placeholder {
+  color: var(--ink-faint);
+}
+
+.register-field input:hover,
+.register-field select:hover {
+  border-color: var(--moss);
+}
+
+.register-field input:focus,
+.register-field select:focus {
+  border-color: var(--moss);
+
+  background: var(--surface);
+
+  box-shadow:
+    0 0 0 3px var(--moss-soft),
+    var(--shadow-soft);
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================
+   AGE / GENDER ROW
+   ========================================= */
+
+.register-row {
+  display: grid;
+
+  grid-template-columns: 0.65fr 1.35fr;
+
+  gap: var(--space-4);
+}
+
+
+/* =========================================
+   SUBMIT BUTTON
+   ========================================= */
+
+.register-submit {
+  width: 100%;
+
+  min-height: 48px;
+
+  margin-top: var(--space-2);
+
+  animation: registerFieldIn 0.45s ease 0.48s both;
+}
+
+.register-submit:hover:not(:disabled) {
+  transform: translateY(-3px);
+}
+
+.register-submit:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
+}
+
+.register-arrow {
+  display: inline-block;
+
+  font-size: 1.1rem;
+
+  transition: transform 0.18s ease;
+}
+
+.register-submit:hover:not(:disabled) .register-arrow {
+  transform: translateX(5px);
+}
+
+
+/* =========================================
+   LOADING
+   ========================================= */
+
+.register-spinner {
+  width: 16px;
+  height: 16px;
+
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+
+  border-radius: 50%;
+
+  animation: registerSpin 0.7s linear infinite;
+}
+
+@keyframes registerSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================================
+   FOOTER
+   ========================================= */
+
+.register-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  margin-top: var(--space-5);
+
+  font-size: 0.85rem;
+
+  animation: fadeIn 0.5s ease 0.55s both;
+}
+
+.register-footer span {
+  color: var(--ink-faint);
+}
+
+.register-footer a {
+  color: var(--moss-deep);
+
+  font-weight: 600;
+  text-decoration: none;
+
+  transition:
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.register-footer a:hover {
+  color: var(--amber);
+}
+
+
+/* =========================================
+   DECORATIVE BACKGROUND NUMBERS
+   ========================================= */
+
+.register-decoration {
+  position: absolute;
+
+  display: grid;
+  grid-template-columns: repeat(2, 44px);
+  gap: 6px;
+
+  opacity: 0.22;
+
+  pointer-events: none;
+
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+
+  animation: decorationFloat 7s ease-in-out infinite;
+}
+
+.register-decoration span {
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--surface);
+
+  border: 1px solid var(--line);
+
+  border-radius: var(--radius-sm);
+
+  box-shadow: var(--shadow-soft);
+}
+
+.register-decoration-left {
+  left: 8%;
+  top: 25%;
+
+  transform: rotate(-8deg);
+}
+
+.register-decoration-right {
+  right: 8%;
+  bottom: 22%;
+
+  transform: rotate(8deg);
+
+  animation-delay: -3s;
+}
+
+@keyframes decorationFloat {
+  0%,
+  100% {
+    margin-top: 0;
+  }
+
+  50% {
+    margin-top: -10px;
+  }
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 700px) {
+  .register-page {
+    min-height: auto;
+
+    padding: var(--space-6) var(--space-4);
+  }
+
+  .register-card {
+    padding: var(--space-6) var(--space-5);
+  }
+
+  .register-decoration {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .register-header {
+    align-items: flex-start;
+  }
+
+  .register-mark {
+    width: 44px;
+    height: 44px;
+  }
+
+  .register-heading h1 {
+    font-size: 1.5rem;
+  }
+
+  .register-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .register-card {
+    padding: var(--space-5) var(--space-4);
+  }
+}

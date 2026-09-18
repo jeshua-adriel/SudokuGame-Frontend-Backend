@@ -1,0 +1,200 @@
+.hero {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--space-8);
+  align-items: center;
+  padding: var(--space-7) 0 var(--space-8);
+}
+
+.hero-copy {
+  animation: fadeInUp 0.6s ease both;
+}
+
+.hero-art {
+  animation: fadeInUp 0.6s ease both;
+  animation-delay: 0.1s;
+}
+
+.hero-stat {
+  animation: fadeInUp 0.5s ease both;
+}
+.hero-stat:nth-child(1) { animation-delay: 0.25s; }
+.hero-stat:nth-child(2) { animation-delay: 0.32s; }
+.hero-stat:nth-child(3) { animation-delay: 0.39s; }
+
+.hero-copy .eyebrow-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--moss-deep);
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-bottom: var(--space-4);
+}
+
+.hero-copy .eyebrow-mark .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--amber);
+}
+
+.hero-copy h1 {
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  line-height: 1.08;
+  max-width: 12ch;
+}
+
+.hero-copy p {
+  margin-top: var(--space-4);
+  font-size: 1.08rem;
+  max-width: 42ch;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.hero-stats {
+  display: flex;
+  gap: var(--space-6);
+  margin-top: var(--space-7);
+}
+
+.hero-stat .num {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--moss-deep);
+}
+
+.hero-stat .label {
+  font-size: 0.82rem;
+  color: var(--ink-faint);
+}
+
+/* decorative mini sudoku grid used as hero art */
+.hero-art {
+  display: flex;
+  justify-content: center;
+}
+
+.mini-grid {
+  --cell: 38px;
+  display: grid;
+  grid-template-columns: repeat(9, var(--cell));
+  grid-template-rows: repeat(9, var(--cell));
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  padding: var(--space-5);
+  transform: rotate(-2deg);
+  animation: floaty 6s ease-in-out infinite;
+}
+
+@keyframes floaty {
+  0%, 100% { transform: rotate(-2deg) translateY(0); }
+  50% { transform: rotate(-2deg) translateY(-8px); }
+}
+
+.mini-grid .mg-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+}
+
+.mini-grid .mg-cell.filled {
+  color: var(--moss-deep);
+  font-weight: 500;
+}
+
+.mini-grid .mg-cell.accent {
+  background: var(--amber-soft);
+  color: var(--amber);
+  font-weight: 600;
+}
+
+.mini-grid .mg-cell:nth-child(3n) {
+  border-right: 2px solid var(--line-strong);
+}
+.mini-grid .mg-cell:nth-child(9n) {
+  border-right: 1px solid var(--line);
+}
+.mini-grid .row-thick {
+  border-bottom: 2px solid var(--line-strong);
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+  padding-bottom: var(--space-8);
+}
+
+.feature-card {
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  border: 1px solid var(--line);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  animation: fadeInUp 0.5s ease both;
+}
+.feature-card:nth-child(1) { animation-delay: 0.1s; }
+.feature-card:nth-child(2) { animation-delay: 0.18s; }
+.feature-card:nth-child(3) { animation-delay: 0.26s; }
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-soft);
+  border-color: var(--moss);
+}
+
+.feature-card:hover .feature-glyph {
+  transform: scale(1.08) rotate(-4deg);
+}
+
+.feature-glyph {
+  transition: transform 0.2s ease;
+}
+
+.feature-card h3 {
+  font-size: 1.05rem;
+  margin-bottom: var(--space-2);
+}
+
+.feature-card p {
+  font-size: 0.92rem;
+}
+
+.feature-glyph {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  background: var(--moss-soft);
+  color: var(--moss-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  margin-bottom: var(--space-4);
+}
+
+@media (max-width: 860px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+  .hero-art {
+    order: -1;
+  }
+  .features {
+    grid-template-columns: 1fr;
+  }
+}

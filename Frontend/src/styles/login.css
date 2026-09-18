@@ -1,0 +1,574 @@
+/* =========================================================
+   LOGIN PAGE
+   Uses the existing SudokiGame theme variables
+   ========================================================= */
+
+.login-page {
+    min-height: 80vh;
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: var(--space-xl, 48px) var(--space-md, 24px);
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   LOGIN CARD
+   ========================================================= */
+
+.login-card {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    max-width: 420px;
+
+    padding: 42px;
+
+    background: var(--surface, #ffffff);
+    border: 1px solid var(--line, #ded8cc);
+    border-radius: var(--radius-md, 16px);
+
+    box-shadow: var(
+        --shadow-soft,
+        0 12px 35px rgba(0, 0, 0, 0.12)
+    );
+
+    animation: loginCardIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+
+/* Sudoku 3x3 mark */
+
+.login-mark {
+    width: 72px;
+    height: 72px;
+
+    margin: 0 auto 22px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    border: 2px solid var(--ink, #222);
+    border-radius: var(--radius-sm, 8px);
+
+    overflow: hidden;
+
+    transform: rotate(-3deg);
+
+    animation: loginMarkIn 0.8s
+        cubic-bezier(0.22, 1, 0.36, 1)
+        0.15s both;
+}
+
+.login-mark span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: var(--font-display, inherit);
+    font-size: 13px;
+    font-weight: 700;
+
+    color: var(--ink-soft, #666);
+
+    border-right: 1px solid var(--line, #ded8cc);
+    border-bottom: 1px solid var(--line, #ded8cc);
+
+    opacity: 0;
+
+    animation: loginCellIn 0.35s ease forwards;
+}
+
+.login-mark span:nth-child(1) {
+    animation-delay: 0.25s;
+}
+
+.login-mark span:nth-child(2) {
+    animation-delay: 0.30s;
+}
+
+.login-mark span:nth-child(3) {
+    animation-delay: 0.35s;
+}
+
+.login-mark span:nth-child(4) {
+    animation-delay: 0.40s;
+}
+
+.login-mark span:nth-child(5) {
+    animation-delay: 0.45s;
+}
+
+.login-mark span:nth-child(6) {
+    animation-delay: 0.50s;
+}
+
+.login-mark span:nth-child(7) {
+    animation-delay: 0.55s;
+}
+
+.login-mark span:nth-child(8) {
+    animation-delay: 0.60s;
+}
+
+.login-mark span:nth-child(9) {
+    animation-delay: 0.65s;
+}
+
+
+/* Remove outer borders */
+
+.login-mark span:nth-child(3n) {
+    border-right: none;
+}
+
+.login-mark span:nth-child(n + 7) {
+    border-bottom: none;
+}
+
+
+/* Highlighted Sudoku cells */
+
+.login-mark span.active {
+    color: var(--surface, #fff);
+    background: var(--moss, #667b58);
+}
+
+
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
+
+.login-eyebrow {
+    margin: 0 0 8px;
+
+    font-family: var(--font-body, inherit);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+
+    color: var(--moss, #667b58);
+
+    animation: fadeInUp 0.5s ease 0.25s both;
+}
+
+.login-heading {
+    margin: 0;
+
+    font-family: var(--font-display, inherit);
+    font-size: 2rem;
+    line-height: 1.1;
+
+    color: var(--ink, #222);
+
+    animation: fadeInUp 0.5s ease 0.32s both;
+}
+
+.login-subheading {
+    margin: 10px 0 0;
+
+    font-size: 0.92rem;
+
+    color: var(--ink-soft, #666);
+
+    animation: fadeInUp 0.5s ease 0.39s both;
+}
+
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.login-error {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-bottom: 20px;
+    padding: 11px 13px;
+
+    border: 1px solid rgba(180, 70, 60, 0.25);
+    border-radius: var(--radius-sm, 8px);
+
+    background: var(--clay-soft, rgba(180, 70, 60, 0.08));
+    color: var(--clay, #a74e43);
+
+    font-size: 0.86rem;
+
+    animation: loginErrorIn 0.4s ease both;
+}
+
+.login-error-icon {
+    width: 20px;
+    height: 20px;
+
+    flex: 0 0 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    background: var(--clay, #a74e43);
+    color: white;
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 19px;
+}
+
+
+/* Form fields */
+
+.login-field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    animation: fadeInUp 0.5s ease both;
+}
+
+.login-field.field-1 {
+    animation-delay: 0.45s;
+}
+
+.login-field.field-2 {
+    animation-delay: 0.52s;
+}
+
+.login-field label {
+    font-size: 0.82rem;
+    font-weight: 700;
+
+    color: var(--ink, #222);
+}
+
+.login-field input {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 12px 14px;
+
+    border: 1px solid var(--line, #ded8cc);
+    border-radius: var(--radius-sm, 8px);
+
+    background: var(
+        --surface-soft,
+        #f7f5f0
+    );
+
+    color: var(--ink, #222);
+
+    font-family: var(--font-body, inherit);
+    font-size: 0.92rem;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.login-field input::placeholder {
+    color: var(--ink-faint, #999);
+}
+
+.login-field input:hover {
+    border-color: var(--line-strong, #c7c0b3);
+}
+
+.login-field input:focus {
+    background: var(--surface, #fff);
+
+    border-color: var(--moss, #667b58);
+
+    box-shadow:
+        0 0 0 3px var(--moss-soft, rgba(102, 123, 88, 0.14));
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   SUBMIT BUTTON
+   ========================================================= */
+
+.login-submit {
+    width: 100%;
+
+    margin-top: 4px;
+
+    min-height: 46px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    border: none;
+    border-radius: var(--radius-sm, 8px);
+
+    background: var(--moss, #667b58);
+    color: white;
+
+    font-family: var(--font-body, inherit);
+    font-size: 0.9rem;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 12px rgba(0, 0, 0, 0.12);
+
+    animation: fadeInUp 0.5s ease 0.59s both;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.login-submit:hover:not(:disabled) {
+    background: var(--moss-deep, #526647);
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 18px rgba(0, 0, 0, 0.16);
+}
+
+.login-submit:active:not(:disabled) {
+    transform: translateY(0);
+
+    box-shadow:
+        0 3px 7px rgba(0, 0, 0, 0.12);
+}
+
+.login-submit:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+
+/* Arrow */
+
+.login-arrow {
+    font-size: 1.15rem;
+
+    transition:
+        transform 0.2s ease;
+}
+
+.login-submit:hover:not(:disabled) .login-arrow {
+    transform: translateX(5px);
+}
+
+
+/* =========================================================
+   LOADING SPINNER
+   ========================================================= */
+
+.login-spinner {
+    width: 16px;
+    height: 16px;
+
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-top-color: white;
+
+    border-radius: 50%;
+
+    animation: loginSpin 0.7s linear infinite;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.login-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+
+    margin-top: 25px;
+
+    font-size: 0.84rem;
+
+    color: var(--ink-soft, #666);
+
+    animation: fadeInUp 0.5s ease 0.66s both;
+}
+
+.login-footer a {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+
+    color: var(--moss, #667b58);
+
+    font-weight: 800;
+
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.login-footer a:hover {
+    color: var(--moss-deep, #526647);
+
+    transform: translateX(2px);
+}
+
+.login-link-arrow {
+    transition:
+        transform 0.2s ease;
+}
+
+.login-footer a:hover .login-link-arrow {
+    transform: translateX(3px);
+}
+
+
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes loginCardIn {
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes loginMarkIn {
+    from {
+        opacity: 0;
+        transform: rotate(-8deg) scale(0.7);
+    }
+
+    to {
+        opacity: 1;
+        transform: rotate(-3deg) scale(1);
+    }
+}
+
+@keyframes loginCellIn {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes loginErrorIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-8px);
+    }
+
+    60% {
+        transform: translateX(4px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes loginSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 600px) {
+    .login-page {
+        min-height: 75vh;
+        padding: 30px 18px;
+    }
+
+    .login-card {
+        padding: 32px 24px;
+    }
+
+    .login-heading {
+        font-size: 1.75rem;
+    }
+
+    .login-decoration {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .login-card,
+    .login-mark,
+    .login-mark span,
+    .login-field,
+    .login-submit,
+    .login-footer,
+    .login-error,
+    .login-decoration span {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+
+    .login-field input,
+    .login-submit,
+    .login-footer a,
+    .login-arrow,
+    .login-link-arrow {
+        transition: none;
+    }
+}

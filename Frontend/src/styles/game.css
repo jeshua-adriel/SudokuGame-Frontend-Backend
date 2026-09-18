@@ -1,0 +1,909 @@
+
+/* =========================================================
+   GAME PAGE
+   ========================================================= */
+
+.game-page {
+  padding: var(--space-6) 0 var(--space-8);
+}
+
+
+/* =========================================================
+   TOP BAR
+   ========================================================= */
+
+.game-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: var(--space-6);
+
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.game-topbar .difficulty-tag {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  text-transform: capitalize;
+}
+
+.game-stats {
+  display: flex;
+  gap: var(--space-5);
+  align-items: center;
+}
+
+.stat-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  background: var(--surface);
+
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+
+  padding: 8px 16px;
+  min-width: 74px;
+
+  transition:
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+}
+
+.stat-chip:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+.stat-chip .stat-label {
+  font-size: 0.7rem;
+  color: var(--ink-faint);
+  text-transform: none;
+}
+
+.stat-chip .stat-value {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--ink);
+}
+
+.stat-chip.timer .stat-value {
+  color: var(--amber);
+  animation: softPulse 2.4s ease-in-out infinite;
+}
+
+.stat-chip.wrong .stat-value {
+  color: var(--clay);
+}
+
+
+/* =========================================================
+   GAME LAYOUT
+   ========================================================= */
+
+.game-layout {
+  display: grid;
+
+  grid-template-columns: auto 260px;
+
+  gap: var(--space-7);
+
+  align-items: start;
+  justify-content: center;
+}
+
+
+/* =========================================================
+   BOARD WRAPPER
+   ========================================================= */
+
+.board-wrap {
+  background: var(--surface);
+
+  border-radius: var(--radius-md);
+
+  padding: var(--space-5);
+
+  box-shadow: var(--shadow-soft);
+
+  animation: fadeInUp 0.4s ease both;
+}
+
+
+/* =========================================================
+   BOARD HEADER
+   ========================================================= */
+
+.board-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+
+  margin-bottom: var(--space-3);
+
+  gap: var(--space-3);
+}
+
+.board-title {
+  font-family: var(--font-display);
+
+  font-size: 1rem;
+  font-weight: 700;
+
+  color: var(--ink);
+
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.board-hint {
+  font-size: 0.75rem;
+  color: var(--ink-faint);
+}
+
+
+/* =========================================================
+   SUDOKU BOARD
+   ========================================================= */
+
+.sudoku-board {
+  /*
+   * Desktop cell size.
+   * The responsive section below automatically
+   * reduces this on smaller screens.
+   */
+  --cell: 52px;
+
+  /*
+   * Normal cell border.
+   */
+  --cell-line: rgba(70, 75, 85, 0.32);
+
+  /*
+   * Thick 3x3 box border.
+   */
+  --block-line: var(--ink);
+
+  display: grid;
+
+  grid-template-columns: repeat(9, var(--cell));
+  grid-template-rows: repeat(9, var(--cell));
+
+  width: fit-content;
+  height: fit-content;
+
+  /*
+   * The board background becomes visible
+   * between cells.
+   */
+  background: var(--line-strong);
+
+  gap: 0;
+
+  border: 3px solid var(--ink);
+
+  border-radius: 8px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.12),
+    0 2px 6px rgba(0, 0, 0, 0.08);
+
+  isolation: isolate;
+}
+
+
+/* =========================================================
+   SUDOKU CELL
+   ========================================================= */
+
+.sudoku-cell {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: var(--cell);
+  height: var(--cell);
+
+  padding: 0;
+
+  /*
+   * Every cell gets a visible border.
+   */
+  border: 1px solid var(--cell-line);
+
+  background: var(--surface);
+
+  font-family: var(--font-display);
+
+  font-size: 1.3rem;
+  font-weight: 500;
+
+  color: var(--moss-deep);
+
+  cursor: pointer;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  transition:
+    background 0.14s ease,
+    color 0.14s ease,
+    transform 0.1s ease,
+    box-shadow 0.14s ease,
+    border-color 0.14s ease;
+}
+
+
+/* =========================================================
+   NUMBER
+   ========================================================= */
+
+.sudoku-cell-value {
+  position: relative;
+
+  z-index: 2;
+
+  line-height: 1;
+
+  transition:
+    transform 0.16s ease,
+    opacity 0.16s ease;
+}
+
+
+/* =========================================================
+   GIVEN NUMBERS
+   ========================================================= */
+
+.sudoku-cell.given {
+  color: var(--ink);
+
+  font-weight: 600;
+
+  cursor: default;
+
+  background: var(--surface);
+}
+
+
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+.sudoku-cell:hover:not(.given) {
+  background: var(--moss-soft);
+
+  border-color: var(--moss);
+
+  z-index: 3;
+
+  box-shadow:
+    inset 0 0 0 2px rgba(70, 110, 80, 0.12);
+}
+
+.sudoku-cell:hover:not(.given) .sudoku-cell-value {
+  transform: scale(1.06);
+}
+
+
+/* =========================================================
+   SELECTED CELL
+   ========================================================= */
+
+.sudoku-cell.selected {
+  background: var(--amber-soft);
+
+  color: var(--ink);
+
+  z-index: 5;
+
+  border-color: var(--amber);
+
+  box-shadow:
+    inset 0 0 0 2px var(--amber),
+    0 0 10px rgba(190, 145, 45, 0.18);
+}
+
+.sudoku-cell.selected .sudoku-cell-value {
+  transform: scale(1.08);
+}
+
+
+/* =========================================================
+   PEER CELLS
+   Same row / column / 3x3 block
+   ========================================================= */
+
+.sudoku-cell.peer {
+  background: var(--surface-soft);
+}
+
+
+/* =========================================================
+   SAME VALUE
+   ========================================================= */
+
+.sudoku-cell.same-value {
+  color: var(--moss-deep);
+
+  font-weight: 600;
+
+  background: var(--moss-soft);
+}
+
+
+/* =========================================================
+   WRONG CELL
+   ========================================================= */
+
+.sudoku-cell.wrong {
+  color: var(--clay);
+
+  background: var(--clay-soft);
+
+  border-color: var(--clay);
+
+  box-shadow:
+    inset 0 0 0 2px rgba(180, 70, 55, 0.18);
+}
+
+
+/* =========================================================
+   3x3 BLOCK BORDERS
+   ========================================================= */
+
+/*
+ * LEFT edge of columns 1, 4 and 7.
+ */
+
+.sudoku-cell.block-left {
+  border-left: 2px solid var(--block-line);
+}
+
+
+/*
+ * RIGHT edge of columns 3, 6 and 9.
+ */
+
+.sudoku-cell.block-right {
+  border-right: 2px solid var(--block-line);
+}
+
+
+/*
+ * TOP edge of rows 1, 4 and 7.
+ */
+
+.sudoku-cell.block-top {
+  border-top: 2px solid var(--block-line);
+}
+
+
+/*
+ * BOTTOM edge of rows 3, 6 and 9.
+ */
+
+.sudoku-cell.block-bottom {
+  border-bottom: 2px solid var(--block-line);
+}
+
+
+/* =========================================================
+   FEEDBACK ANIMATIONS
+   ========================================================= */
+
+.sudoku-cell.cell-pop {
+  animation:
+    cellPop
+    0.28s
+    cubic-bezier(0.34, 1.56, 0.64, 1)
+    both;
+}
+
+.sudoku-cell.cell-shake {
+  animation:
+    cellShake
+    0.32s
+    ease
+    both;
+}
+
+@keyframes cellPop {
+  0% {
+    transform: scale(1);
+  }
+
+  45% {
+    transform: scale(1.12);
+  }
+
+  75% {
+    transform: scale(0.97);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes cellShake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20% {
+    transform: translateX(-5px);
+  }
+
+  40% {
+    transform: translateX(5px);
+  }
+
+  60% {
+    transform: translateX(-4px);
+  }
+
+  80% {
+    transform: translateX(4px);
+  }
+}
+
+
+/* =========================================================
+   CELL PRESS
+   ========================================================= */
+
+.sudoku-cell:active:not(.given) {
+  transform: scale(0.94);
+}
+
+
+/* =========================================================
+   FOCUS
+   ========================================================= */
+
+.sudoku-cell:focus-visible {
+  outline: 3px solid var(--amber);
+
+  outline-offset: -3px;
+
+  z-index: 10;
+}
+
+
+/* =========================================================
+   SIDE PANEL
+   ========================================================= */
+
+.side-panel {
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--space-5);
+}
+
+
+/* =========================================================
+   NUMBER PAD
+   ========================================================= */
+
+.number-pad {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: var(--space-2);
+
+  background: var(--surface);
+
+  border-radius: var(--radius-md);
+
+  padding: var(--space-4);
+
+  box-shadow: var(--shadow-soft);
+}
+
+.number-pad button {
+  aspect-ratio: 1;
+
+  border: 1px solid var(--line);
+
+  background: var(--surface-soft);
+
+  border-radius: var(--radius-sm);
+
+  font-family: var(--font-display);
+
+  font-size: 1.2rem;
+
+  color: var(--ink);
+
+  cursor: pointer;
+
+  transition:
+    background 0.12s ease,
+    color 0.12s ease,
+    transform 0.1s ease,
+    box-shadow 0.12s ease;
+}
+
+.number-pad button:hover:not(:disabled) {
+  background: var(--moss-soft);
+
+  color: var(--moss-deep);
+
+  transform: translateY(-2px);
+
+  box-shadow: var(--shadow-soft);
+}
+
+.number-pad button:active:not(:disabled) {
+  transform: scale(0.92);
+}
+
+.number-pad button.erase {
+  grid-column: span 3;
+
+  aspect-ratio: auto;
+
+  padding: 10px;
+
+  font-family: var(--font-body);
+
+  font-size: 0.85rem;
+
+  font-weight: 600;
+
+  color: var(--ink-soft);
+}
+
+
+/* =========================================================
+   SIDE ACTIONS
+   ========================================================= */
+
+.side-actions {
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--space-3);
+}
+
+
+/* =========================================================
+   AUDIO PANEL
+   ========================================================= */
+
+.audio-panel {
+  background: var(--surface);
+
+  border-radius: var(--radius-md);
+
+  padding: var(--space-4) var(--space-5);
+
+  box-shadow: var(--shadow-soft);
+
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--space-3);
+}
+
+.audio-row {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  font-size: 0.88rem;
+
+  color: var(--ink-soft);
+}
+
+.audio-row .toggle {
+  width: 40px;
+  height: 22px;
+
+  border-radius: var(--radius-pill);
+
+  background: var(--line-strong);
+
+  border: none;
+
+  position: relative;
+
+  cursor: pointer;
+}
+
+.audio-row .toggle.on {
+  background: var(--moss);
+}
+
+.audio-row .toggle::after {
+  content: "";
+
+  position: absolute;
+
+  top: 2px;
+  left: 2px;
+
+  width: 18px;
+  height: 18px;
+
+  border-radius: 50%;
+
+  background: #fff;
+
+  transition: left 0.15s ease;
+}
+
+.audio-row .toggle.on::after {
+  left: 20px;
+}
+
+.audio-row input[type="range"] {
+  width: 100px;
+
+  accent-color: var(--moss);
+}
+
+
+/* =========================================================
+   RESULT MODAL
+   ========================================================= */
+
+.result-card {
+  background: var(--surface);
+
+  border-radius: var(--radius-md);
+
+  padding: var(--space-7);
+
+  max-width: 440px;
+  width: 100%;
+
+  box-shadow: var(--shadow-soft);
+
+  text-align: center;
+
+  animation:
+    scaleIn
+    0.28s
+    cubic-bezier(0.2, 0.8, 0.3, 1)
+    both;
+}
+
+.result-card .result-badge {
+  width: 56px;
+  height: 56px;
+
+  margin: 0 auto var(--space-4);
+
+  border-radius: 50%;
+
+  background: var(--amber-soft);
+
+  color: var(--amber);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-family: var(--font-display);
+
+  font-size: 1.5rem;
+
+  animation:
+    badgeBounce
+    0.5s
+    cubic-bezier(0.34, 1.56, 0.64, 1)
+    both;
+
+  animation-delay: 0.1s;
+}
+
+.result-card h2 {
+  font-size: 1.6rem;
+
+  margin-bottom: var(--space-2);
+}
+
+.result-score {
+  font-family: var(--font-display);
+
+  font-size: 3rem;
+
+  color: var(--moss-deep);
+
+  margin: var(--space-4) 0;
+
+  animation: fadeInUp 0.4s ease both;
+
+  animation-delay: 0.2s;
+}
+
+.result-breakdown {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: var(--space-3);
+
+  margin-bottom: var(--space-6);
+}
+
+.result-breakdown div {
+  background: var(--surface-soft);
+
+  border-radius: var(--radius-sm);
+
+  padding: var(--space-3);
+}
+
+.result-breakdown > div {
+  animation: fadeInUp 0.4s ease both;
+}
+
+.result-breakdown > div:nth-child(1) {
+  animation-delay: 0.3s;
+}
+
+.result-breakdown > div:nth-child(2) {
+  animation-delay: 0.36s;
+}
+
+.result-breakdown > div:nth-child(3) {
+  animation-delay: 0.42s;
+}
+
+.result-breakdown .val {
+  font-family: var(--font-display);
+
+  font-size: 1.2rem;
+
+  color: var(--ink);
+}
+
+.result-breakdown .lbl {
+  font-size: 0.72rem;
+
+  color: var(--ink-faint);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 860px) {
+
+  .game-layout {
+    grid-template-columns: 1fr;
+
+    justify-items: center;
+
+    width: 100%;
+  }
+
+  .side-panel {
+    width: min(100%, 420px);
+  }
+
+  .board-wrap {
+    max-width: 100%;
+
+    padding: var(--space-4);
+  }
+
+  .sudoku-board {
+    /*
+     * Board width becomes responsive.
+     */
+    --cell: min(9.5vw, 52px);
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .game-page {
+    padding-top: var(--space-4);
+  }
+
+  .game-topbar {
+    align-items: flex-start;
+  }
+
+  .game-stats {
+    width: 100%;
+
+    gap: var(--space-2);
+
+    flex-wrap: wrap;
+  }
+
+  .stat-chip {
+    flex: 1;
+
+    min-width: 65px;
+
+    padding: 7px 10px;
+  }
+
+  .stat-chip .stat-value {
+    font-size: 1rem;
+  }
+
+  .board-wrap {
+    padding: var(--space-3);
+
+    border-radius: var(--radius-sm);
+  }
+
+  .board-header {
+    margin-bottom: var(--space-2);
+  }
+
+  .board-hint {
+    display: none;
+  }
+
+  .sudoku-board {
+    --cell: min(10vw, 44px);
+
+    border-width: 2px;
+
+    border-radius: 6px;
+  }
+
+  .sudoku-cell {
+    font-size: clamp(0.95rem, 5vw, 1.2rem);
+  }
+
+  .sudoku-cell.block-left,
+  .sudoku-cell.block-right,
+  .sudoku-cell.block-top,
+  .sudoku-cell.block-bottom {
+    border-width: 2px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .sudoku-cell,
+  .sudoku-cell-value,
+  .stat-chip {
+    transition: none;
+  }
+
+  .stat-chip.timer .stat-value {
+    animation: none;
+  }
+
+  .sudoku-cell.cell-pop,
+  .sudoku-cell.cell-shake,
+  .board-wrap,
+  .result-card,
+  .result-card .result-badge,
+  .result-score,
+  .result-breakdown > div {
+    animation: none;
+  }
+}
+
